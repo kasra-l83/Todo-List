@@ -1,4 +1,4 @@
-import { ITodo } from "./todo"
+import type { ITodo } from "./todo"
 import { useEffect, useState } from "react"
 import TodoList from "./components/TodosList"
 import { useQuery } from "@tanstack/react-query"
@@ -12,6 +12,10 @@ function App() {
     queryFn: () => fetchTodosList(),
     refetchOnWindowFocus: false,
   })
+
+  const deleteHandler= (id: number) =>{
+    setTodos(todos.filter(todo => todo.id!== id));
+  }
   
   useEffect(() =>{
     if (todo.data) {
@@ -22,7 +26,7 @@ function App() {
   return (
     <main className="container mx-auto my-4">
       <h1 className="text-center text-3xl font-bold">Todo List Application</h1>
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} onDelete={deleteHandler}/>
     </main>
   )
 }

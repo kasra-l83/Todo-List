@@ -1,11 +1,12 @@
-import { ITodo } from "../todo"
+import type { ITodo } from "../todo"
 import { FiTrash, FiEdit2 } from "react-icons/fi"
 
 interface TodoCardProps {
   todo: ITodo
+  onDelete: (id: number) => void
 }
   
-const TodoCard: React.FC<TodoCardProps> = ({ todo }) =>{
+const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete }) =>{
   return (
     <div className={`flex items-center justify-between p-3 border rounded-lg ${todo.completed ? "bg-gray-100" : ""}`}>
       <span className="flex items-center gap-x-3">
@@ -16,7 +17,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo }) =>{
         <button className="rounded p-2 hover:bg-gray-200">
           <FiEdit2/>
         </button>
-        <button className="rounded p-2 hover:bg-gray-200">
+        <button className="rounded p-2 hover:bg-gray-200" onClick={() => onDelete(todo.id)}>
           <FiTrash/>
         </button>
       </span>
