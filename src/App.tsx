@@ -25,6 +25,11 @@ function App() {
   const addHandler= (newTodo: ITodo) =>{
     setTodos([ newTodo, ...todos ])
   }
+  const editHandler= (id: number, newTitle: string) =>{
+    setTodos(todos.map(todo => 
+      todo.id=== id ? { ...todo, title: newTitle } : todo
+    ))
+  }
   
   useEffect(() =>{
     if (todo.data) {
@@ -36,7 +41,7 @@ function App() {
     <main className="container mx-auto my-4 max-w-[800px] space-y-5 px-5 md:px-0">
       <h1 className="text-center text-3xl font-bold">Todo List Application</h1>
       <TodoForm todos={todos} add={addHandler}/>
-      <TodoList todos={todos} onDelete={deleteHandler} complete={completeHandler}/>
+      <TodoList todos={todos} onDelete={deleteHandler} complete={completeHandler} edit={editHandler}/>
     </main>
   )
 }
