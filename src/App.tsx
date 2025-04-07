@@ -16,6 +16,11 @@ function App() {
   const deleteHandler= (id: number) =>{
     setTodos(todos.filter(todo => todo.id!== id));
   }
+  const completeHandler= (id: number) =>{
+    setTodos(todos.map(todo => 
+      todo.id=== id ? { ...todo, completed: !todo.completed } : todo
+    ))
+  }
   
   useEffect(() =>{
     if (todo.data) {
@@ -26,7 +31,7 @@ function App() {
   return (
     <main className="container mx-auto my-4">
       <h1 className="text-center text-3xl font-bold">Todo List Application</h1>
-      <TodoList todos={todos} onDelete={deleteHandler}/>
+      <TodoList todos={todos} onDelete={deleteHandler} complete={completeHandler}/>
     </main>
   )
 }

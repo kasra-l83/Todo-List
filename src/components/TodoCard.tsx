@@ -4,13 +4,14 @@ import { FiTrash, FiEdit2 } from "react-icons/fi"
 interface TodoCardProps {
   todo: ITodo
   onDelete: (id: number) => void
+  complete: (id: number) => void
 }
   
-const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete }) =>{
+const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, complete }) =>{
   return (
     <div className={`flex items-center justify-between p-3 border rounded-lg ${todo.completed ? "bg-gray-100" : ""}`}>
       <span className="flex items-center gap-x-3">
-        <input type="checkbox" className="size-4 cursor-pointer"/>
+        <input type="checkbox" checked={todo.completed} onChange={() => complete(todo.id)} className="size-4 cursor-pointer accent-gray-500"/>
         <h3 className={todo.completed ? "line-through text-gray-500" : ""}>{todo.title}</h3>
       </span>
       <span className="flex">
