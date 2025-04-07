@@ -1,5 +1,5 @@
-import { useState } from "react"
 import type { ITodo } from "../todo"
+import React, { useState } from "react"
 import { CgClose } from "react-icons/cg"
 import { FaCheck } from "react-icons/fa6"
 import { FiTrash, FiEdit2 } from "react-icons/fi"
@@ -10,8 +10,22 @@ interface TodoCardProps {
   complete: (id: number) => void
   onEdit: (id: number, newTitle: string) => void
 }
-  
-const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, complete, onEdit }) =>{
+
+export const TodoCardSkeleton: React.FC= () =>{
+  return(
+    <div className="p-3 rounded-lg border flex justify-between">
+      <span className="flex items-center w-1/2 gap-x-3">
+        <div className="size-5 bg-gray-100 rounded-sm"></div>
+        <div className="h-6 rounded bg-gray-100 w-full"></div>
+      </span>
+      <span className="flex gap-x-2">
+        <div className="rounded bg-gray-100 size-8"></div>
+        <div className="rounded bg-gray-100 size-8"></div>
+      </span>
+    </div>
+  )
+}
+export const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, complete, onEdit }) =>{
   const [edit, setEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(todo.title);
 
@@ -58,4 +72,3 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, complete, onEdit })
     </div>
   )
 }
-export default TodoCard

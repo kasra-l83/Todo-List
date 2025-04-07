@@ -1,5 +1,5 @@
-import TodoCard from "./TodoCard"
 import type { ITodo } from "../todo"
+import { TodoCard } from "./TodoCard"
 
 interface TodoListProps {
   todos: ITodo[]

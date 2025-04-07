@@ -4,6 +4,7 @@ import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodosList"
 import { useQuery } from "@tanstack/react-query"
 import { fetchTodosList } from "./apis/todos.api"
+import { TodoCardSkeleton } from "./components/TodoCard"
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -41,7 +42,17 @@ function App() {
     <main className="container mx-auto my-4 max-w-[800px] space-y-5 px-5 md:px-0">
       <h1 className="text-center text-3xl font-bold">Todo List Application</h1>
       <TodoForm todos={todos} add={addHandler}/>
-      <TodoList todos={todos} onDelete={deleteHandler} complete={completeHandler} edit={editHandler}/>
+      {todo.isSuccess ? (
+        <TodoList todos={todos} onDelete={deleteHandler} complete={completeHandler} edit={editHandler}/>
+      ) : (
+        <>
+          {
+            [...Array(10)].map((_, index) =>(
+              <TodoCardSkeleton key={index}/>
+            ))
+          }
+        </>
+      )}
     </main>
   )
 }
